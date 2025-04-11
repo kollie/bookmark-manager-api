@@ -37,12 +37,6 @@ jobs:
           DATABASE_URL: ${{ env.DATABASE_URL }}
           SECRET_KEY: ${{ env.SECRET_KEY }}
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage.xml
-          fail_ci_if_error: true
-
   build-and-deploy:
     needs: test
     runs-on: ubuntu-latest
