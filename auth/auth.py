@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 from database import get_db
 from models.user import User
-from schema.user import TokenData
+from schemas.user import TokenData
 
 load_dotenv()
 
