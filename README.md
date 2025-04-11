@@ -22,7 +22,7 @@ A RESTful API built with FastAPI that allows users to manage their bookmarks wit
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/kollie/bookmark-manager-api.git
 cd bookmark-manager-api
 ```
 
