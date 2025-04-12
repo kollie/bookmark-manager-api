@@ -46,7 +46,7 @@ SECRET_KEY=your-secret-key-here
 DATABASE_URL=sqlite:///./bookmarks.db
 ```
 
-## Rum migrations
+## Run migrations
 
 1. Initialize the database with alembic
 

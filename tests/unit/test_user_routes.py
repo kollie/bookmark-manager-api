@@ -8,10 +8,6 @@ from auth.auth import get_password_hash
 def test_register_user(client: TestClient, test_user: dict):
     """
     Test that a new user can successfully register.
-
-    This test verifies that the new user’s email and username match the input,
-    the user is assigned a unique ID and creation timestamp, and the hashed_password
-    is not exposed in the response.
     """
     response = client.post("/api/v1/users/register", json=test_user)
     assert response.status_code == 200, "Registration should return status 200"
@@ -25,9 +21,6 @@ def test_register_user(client: TestClient, test_user: dict):
 def test_register_duplicate_email(client: TestClient, test_user: dict, db_session: Session):
     """
     Test that registering with a duplicate email fails.
-
-    A user is first created with the test email. A subsequent attempt to register
-    with the same email should fail with a 400 status and the appropriate error message.
     """
     # Create an initial user with the provided email
     user = User(
@@ -46,9 +39,6 @@ def test_register_duplicate_email(client: TestClient, test_user: dict, db_sessio
 def test_register_duplicate_username(client: TestClient, test_user: dict, db_session: Session):
     """
     Test that registering with a duplicate username fails.
-
-    A user is first created with the test username. A new registration attempt using
-    the same username should fail with a 400 status and an appropriate error message.
     """
     # Create an initial user with the provided username
     user = User(
@@ -68,8 +58,6 @@ def test_login_user(client: TestClient, test_user: dict, db_session: Session):
     """
     Test that a user can successfully log in with correct credentials.
 
-    This test creates a user, then logs in using form data for the provided credentials.
-    It verifies that a valid JWT access token is returned.
     """
     user = User(
         email=test_user["email"],
@@ -92,9 +80,6 @@ def test_login_user(client: TestClient, test_user: dict, db_session: Session):
 def test_login_invalid_credentials(client: TestClient, test_user: dict):
     """
     Test that login fails when invalid credentials are provided.
-
-    This test verifies that using an incorrect password returns a 401 Unauthorized
-    status with the expected error message.
     """
     response = client.post("/api/v1/users/login", data={
         "username": test_user["username"],
@@ -109,10 +94,6 @@ def test_login_invalid_credentials(client: TestClient, test_user: dict):
 def test_get_current_user(client: TestClient, test_user: dict, db_session: Session):
     """
     Test retrieving the current authenticated user's data.
-
-    This test creates a new user, logs in to obtain a JWT token using form data,
-    and then retrieves the current user's profile. The response should contain the correct email and username,
-    without exposing the hashed_password.
     """
     user = User(
         email=test_user["email"],
@@ -141,9 +122,6 @@ def test_get_current_user(client: TestClient, test_user: dict, db_session: Sessi
 def test_update_user(client: TestClient, test_user: dict, db_session: Session):
     """
     Test updating the current authenticated user's profile.
-
-    This test creates a user, logs in using form data, and updates the user's email and username.
-    It verifies that the changes are correctly reflected in the updated user profile.
     """
     user = User(
         email=test_user["email"],
@@ -176,9 +154,6 @@ def test_update_user(client: TestClient, test_user: dict, db_session: Session):
 def test_delete_user(client: TestClient, test_user: dict, db_session: Session):
     """
     Test deleting the current authenticated user's account.
-
-    This test creates a user, obtains a JWT token through login using form data, deletes the user,
-    and verifies that the user is removed from the database.
     """
     # Create a new user and store its id before deletion.
     user = User(

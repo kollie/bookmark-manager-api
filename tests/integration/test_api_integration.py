@@ -7,8 +7,6 @@ from auth.auth import get_password_hash
 
 def test_full_user_workflow(client: TestClient, test_user: dict, db_session: Session):
     """
-    Test the complete user workflow: registration, login, profile retrieval, update, and deletion.
-
     Steps:
       1. Register a new user and verify that the email and username match the input.
       2. Login with the new user's credentials (using form data) and obtain a JWT access token.
@@ -73,8 +71,6 @@ def test_full_user_workflow(client: TestClient, test_user: dict, db_session: Ses
 
 def test_full_bookmark_workflow(client: TestClient, test_user: dict, test_bookmark: dict, db_session: Session):
     """
-    Test the complete bookmark workflow: creation, retrieval, update, and deletion.
-
     Steps:
       1. Create a test user directly in the database.
       2. Login the user (using form data) and obtain a JWT access token.
@@ -158,8 +154,6 @@ def test_full_bookmark_workflow(client: TestClient, test_user: dict, test_bookma
 
 def test_bookmark_access_control(client: TestClient, test_user: dict, test_bookmark: dict, db_session: Session):
     """
-    Test that a user cannot access bookmarks that belong to another user.
-
     Steps:
       1. Create two separate users in the database.
       2. Create a bookmark for the first user.

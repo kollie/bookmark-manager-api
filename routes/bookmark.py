@@ -19,9 +19,6 @@ async def create_bookmark(
     """
     Create a new bookmark for the current user.
 
-    This endpoint accepts the bookmark data, associates it with the authenticated user,
-    and stores the new bookmark in the database.
-
     Args:
         bookmark (BookmarkCreate): Data required for creating a bookmark.
         current_user (User): The currently authenticated user.
@@ -30,7 +27,7 @@ async def create_bookmark(
     Returns:
         BookmarkResponse: The created bookmark.
     """
-    # Convert the bookmark data to a dictionary and cast the URL to string.
+
     db_bookmark = bookmark.model_dump()
     db_bookmark["url"] = str(db_bookmark["url"])
     
@@ -47,8 +44,6 @@ async def read_bookmarks(
 ):
     """
     Retrieve all bookmarks for the current authenticated user.
-
-    This endpoint fetches and returns all bookmarks that belong to the authenticated user.
 
     Args:
         current_user (User): The currently authenticated user.
@@ -102,9 +97,6 @@ async def update_bookmark(
     """
     Update an existing bookmark of the current user.
 
-    This endpoint updates the provided fields of a bookmark identified by its ID.
-    Only bookmarks belonging to the current user can be updated.
-
     Args:
         bookmark_id (int): The ID of the bookmark to update.
         bookmark_update (BookmarkUpdate): The data to update in the bookmark.
@@ -146,8 +138,6 @@ async def delete_bookmark(
 ):
     """
     Delete a bookmark belonging to the current user.
-
-    This endpoint removes a bookmark by its ID if it exists and is owned by the authenticated user.
 
     Args:
         bookmark_id (int): The ID of the bookmark to delete.

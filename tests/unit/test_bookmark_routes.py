@@ -7,9 +7,7 @@ from models.bookmark import Bookmark
 from auth.auth import get_password_hash
 
 def create_user_and_get_token(client: TestClient, test_user: dict, db_session: Session):
-    """
-    Helper function to create a new user in the database and retrieve a JWT access token.
-    
+    """    
     Args:
         client (TestClient): The FastAPI test client instance.
         test_user (dict): A dictionary containing test user data.
@@ -39,12 +37,6 @@ def create_user_and_get_token(client: TestClient, test_user: dict, db_session: S
 def test_create_bookmark(client: TestClient, test_user: dict, test_bookmark: dict, db_session: Session):
     """
     Test creating a new bookmark.
-    
-    This test simulates a full workflow:
-      - A user is created and logged in to obtain a JWT token.
-      - A bookmark is then created for the logged-in user.
-      - The response is validated to ensure the bookmark's properties match the input data
-        and that the bookmark is correctly associated with the user.
     """
     user, token = create_user_and_get_token(client, test_user, db_session)
 
@@ -64,10 +56,6 @@ def test_create_bookmark(client: TestClient, test_user: dict, test_bookmark: dic
 def test_get_bookmarks(client: TestClient, test_user: dict, test_bookmark: dict, db_session: Session):
     """
     Test retrieving all bookmarks for a specific user.
-    
-    This test creates a user and a bookmark directly in the database,
-    then logs in to obtain a token and retrieves all bookmarks for the user.
-    It verifies that the returned list contains the expected bookmark.
     """
     user = User(
         email=test_user["email"],
@@ -102,10 +90,6 @@ def test_get_bookmarks(client: TestClient, test_user: dict, test_bookmark: dict,
 def test_get_bookmark(client: TestClient, test_user: dict, test_bookmark: dict, db_session: Session):
     """
     Test retrieving a specific bookmark by its ID.
-    
-    This test creates a user and a bookmark in the database,
-    then logs in and uses the bookmark ID to retrieve it.
-    The returned bookmark's details are compared against the test data.
     """
     user = User(
         email=test_user["email"],
@@ -140,10 +124,6 @@ def test_get_bookmark(client: TestClient, test_user: dict, test_bookmark: dict, 
 def test_update_bookmark(client: TestClient, test_user: dict, test_bookmark: dict, db_session: Session):
     """
     Test updating an existing bookmark.
-    
-    This test creates a user and a bookmark, obtains a JWT token,
-    and then updates the bookmark's title.
-    It verifies that the update is successful and that the bookmark's ID remains unchanged.
     """
     user, token = create_user_and_get_token(client, test_user, db_session)
 
@@ -165,9 +145,6 @@ def test_update_bookmark(client: TestClient, test_user: dict, test_bookmark: dic
 def test_delete_bookmark(client: TestClient, test_user: dict, test_bookmark: dict, db_session: Session):
     """
     Test deleting a bookmark.
-    
-    This test creates a user and a bookmark, logs in to retrieve an access token,
-    then deletes the bookmark. It finally confirms that the bookmark can no longer be accessed.
     """
     user, token = create_user_and_get_token(client, test_user, db_session)
 

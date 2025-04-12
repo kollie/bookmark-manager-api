@@ -17,21 +17,11 @@ app = FastAPI(
 # In production, you may want to restrict allowed origins.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Consider replacing "*" with a list of trusted origins in production.
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# @app.on_event("startup")
-# async def startup_event():
-#     """
-#     Event handler that initializes the database on application startup.
-
-#     This function is called when the application starts and will run the
-#     init_db() function to create tables and run any pending migrations.
-#     """
-#     init_db()
 
 # Include API routers with proper versioning and categorization
 app.include_router(auth.router, prefix="/api/v1", tags=["Authentication"])

@@ -42,8 +42,6 @@ def test_create_access_token():
 @pytest.mark.asyncio
 async def test_get_current_user_valid_token(db_session: Session):
     """
-    Test retrieving a valid current user given a valid JWT token.
-
     Steps:
       1. Create a test user and add it to the database.
       2. Generate a valid token for the test user.

@@ -14,7 +14,7 @@ from database import Base, get_db
 from auth.auth import get_password_hash
 
 # Create a test database in memory
-SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"  # In-memory database
+SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:" 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
     connect_args={"check_same_thread": False},
@@ -52,9 +52,6 @@ def db_session():
 def client():
     """
     Create a FastAPI test client with an initialized in-memory database.
-
-    This fixture creates all database tables, yields a TestClient for API requests,
-    and then drops all tables after the tests complete.
     """
     Base.metadata.create_all(bind=engine)
     with TestClient(app) as test_client:
@@ -88,9 +85,6 @@ def auth_headers(client, test_user):
     """
     Create a test user and retrieve authentication headers for API requests.
 
-    This fixture registers a new user via the '/api/v1/users/register' endpoint,
-    logs in using '/api/v1/users/login' to obtain a JWT token, and then returns
-    the 'Authorization' header required for authenticated requests.
     """
     # Register the test user
     response = client.post("/api/v1/users/register", json=test_user)

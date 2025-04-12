@@ -21,9 +21,6 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)):
     """
     Register a new user.
 
-    This endpoint creates a new user with the provided email, username, and password,
-    ensuring that both the email and username are unique.
-
     Args:
         user (UserCreate): The registration data including email, username, and password.
         db (Session): Database session dependency.
