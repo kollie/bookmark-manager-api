@@ -14,7 +14,6 @@ app = FastAPI(
 )
 
 # Configure CORS middleware to allow requests from any origin.
-# In production, you may want to restrict allowed origins.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
